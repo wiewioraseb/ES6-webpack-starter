@@ -14,5 +14,17 @@ module.exports = {
     path: __dirname + '/dist',
     filename: 'bundle.js'
   },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        include: __dirname + '/app',
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'stage-0']
+        }
+      }
+    ]
+  },
   plugins: [HtmlWebpackPluginConfig]
 }

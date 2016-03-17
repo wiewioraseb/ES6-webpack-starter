@@ -1,3 +1,2 @@
-var message = 'Hello ES5';
+let message = 'Hello ES6';
 document.getElementById('app').insertAdjacentHTML('afterbegin', message);
-
