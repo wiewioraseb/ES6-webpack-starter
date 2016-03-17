@@ -8,7 +8,8 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
-    './app/index.js'
+    './app/index.js',
+    'webpack-dev-server/client?http://localhost:8080'
   ],
   output: {
     path: __dirname + '/dist',
