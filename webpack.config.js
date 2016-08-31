@@ -9,17 +9,12 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 var ExtractTextPluginConfig = new ExtractTextPlugin('style.css');
 
-var entryPoint;
-switch(process.env.npm_lifecycle_event) {
-  case 'dev':
-    entryPoint = 'webpack-dev-server/client?http://localhost:8080';
-    break;
-  default:
-    entryPoint = './app/index.js';
-}
+var entrypoint = process.env.npm_lifecycle_event === 'dev' ?
+  'webpack-dev-server/client?http://localhost:8080' :
+  './app/index.js';
 
 module.exports = {
-  entry: [entryPoint],
+  entry: entrypoint,
   output: {
     path: __dirname + '/dist',
     filename: 'bundle.js'
