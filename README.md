@@ -6,10 +6,10 @@ Also supports SASS, just create your `*.scss` file in `/app` and require it, or 
 
 ## Usage
 
-If you don't have webpack installed globally do so by running `npm install webpack -g`.
+If you don't have webpack installed globally do so by running `npm install webpack -g`. Then run `npm install` to install dependencies.
 
-- `npm install`
-- `npm start` to start the live-reload dev server.
-- `npm run build` will build the site for development use, or `npm run production` to build the minified production version. The site will be output into the `/dist` folder.
+- `npm start` will start the live-reload dev server.
+- `npm run build` will build the site for development use. By default site are output in the `dist/` folder
+- `npm run production` will output a minified build for production use.
 - `npm run clean` will remove the `/dist` folder.
 
