@@ -24,6 +24,11 @@ module.exports = {
         query: {
           presets: ['es2015', 'stage-0']
         }
+      },
+      {
+        test: /\.scss$/,
+        include: __dirname + '/app',
+        loader: ['style', 'css', 'sass']
       }
     ]
   },

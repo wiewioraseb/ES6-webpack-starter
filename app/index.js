@@ -1,4 +1,5 @@
 'use strict';
+import './style.scss';
 
 // using rest properties - choosen at random bc it currently raises
 // an error in all browsers, but can be transpiled by Babel
