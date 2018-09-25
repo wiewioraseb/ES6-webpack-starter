@@ -1,40 +1,52 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/app/index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
-
-var ExtractTextPluginConfig = new ExtractTextPlugin('style.css');
-
-var entrypoint = process.env.npm_lifecycle_event === 'dev' ?
-  'webpack-dev-server/client?http://localhost:8080' :
-  './app/index.js';
+var path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: entrypoint,
-  output: {
-    path: __dirname + '/dist',
-    filename: 'bundle.js'
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        include: __dirname + '/app',
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'stage-0']
-        }
-      },
-      {
-        test: /\.scss$/,
-        include: __dirname + '/app',
-        loader: ExtractTextPlugin.extract('css!sass')
-      }
-    ]
-  },
-  plugins: [HtmlWebpackPluginConfig, ExtractTextPluginConfig]
-}
+    devServer: {
+        contentBase: "./dist"
+    },
+    entry: "./app/index.js",
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "bundle.js",
+        publicPath: "/dist"
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: { presets: ["es2015", "stage-0"] }
+                }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: "style-loader" // creates style nodes from JS strings
+                    },
+                    {
+                        loader: "css-loader" // translates CSS into CommonJS
+                    },
+                    {
+                        loader: "sass-loader" // compiles Sass to CSS
+                    }
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: "style.css",
+            // chunkFilename: "[id].css"
+        }),
+        new HtmlWebpackPlugin({
+            template: 'app/index.html',
+        })
+    ],
+};
