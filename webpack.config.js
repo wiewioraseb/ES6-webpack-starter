@@ -26,7 +26,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     {
-                        loader: "style-loader" // creates style nodes from JS strings
+                        loader: MiniCssExtractPlugin.loader,
                     },
                     {
                         loader: "css-loader" // translates CSS into CommonJS
@@ -40,10 +40,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
             filename: "style.css",
-            // chunkFilename: "[id].css"
         }),
         new HtmlWebpackPlugin({
             template: 'app/index.html',
